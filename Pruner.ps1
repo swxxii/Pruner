@@ -11,7 +11,7 @@ Clear-Host
 $PruneAfter = 10
 
 # Change to the IP and Port of your qBittorrent server
-$Server = "10.0.0.4:8081"
+$Server = "10.0.0.2:8081"
 
 #   MAIN SCRIPT EXECUTION
 
