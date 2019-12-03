@@ -1,7 +1,7 @@
 Pruner
 ======
 
-A PowerShell script to remove completed torrents from qBittorrent.
+A simple script to remove completed torrents from qBittorrent - in PowerShell and Python.
 
 ## qBittorrent setup
 
