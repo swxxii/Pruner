@@ -2,6 +2,7 @@ Pruner
 ======
 
 A simple script to remove completed torrents from qBittorrent - in PowerShell and Python.
+Configurable delay (only remove torrents once they have been completed for certain number of minutes).
 
 ## qBittorrent setup
 
