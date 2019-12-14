@@ -34,9 +34,11 @@ thre_str = threshold.strftime('%Y-%m-%d %H:%M:%S')
 
 
 def get_torrents():
-    api_url = "http://{0}/query/torrents?filter=completed".format(server)
-    headers = {'Content-Type': 'application/json'}
+    api_url = "http://{0}/api/v2/torrents/info?filter=completed".format(server)
+    headers = {'Accept': 'application/json'}
     response = requests.get(api_url, headers)
+    print("Request: {0}".format(api_url))
+    print("Response: {0}".format(response.status_code))
     if (response.status_code == 200):
         return json.loads(response.content.decode('utf-8'))
     else:
@@ -68,3 +70,5 @@ if torrents is not None:
             api_url = "http://{0}/command/delete".format(server)
             body = {'hashes': t['hash']}
             response = requests.post(api_url, data=body)
+else:
+    print("No results returned from qBittorrent")
