@@ -46,10 +46,13 @@ def get_torrents():
 
 
 # call the above function
+print("Getting torrents...")
 torrents = get_torrents()
 
 # if we got something, loop over torrents
 if torrents is not None:
+    if len(torrents) < 1:
+        print("No torrents to prune.")
     for t in torrents:
         # convert torrent's finished time into datetime
         finished = datetime.fromtimestamp(int(t['completion_on']))
@@ -67,8 +70,10 @@ if torrents is not None:
 
         # send the prune request to qBittorrent
         if (prune):
-            api_url = "http://{0}/command/delete".format(server)
-            body = {'hashes': t['hash']}
-            response = requests.post(api_url, data=body)
+            api_url = "http://{0}/api/v2/torrents/delete?hashes={1}&deleteFiles=false".format(server,t['hash'])
+            response = requests.post(api_url)
+            print("Request: {0}".format(api_url))
+            print("Response: {0}".format(response.status_code))
+
 else:
-    print("No results returned from qBittorrent")
+    print("Request error.")
