@@ -6,6 +6,7 @@ A simple script to remove completed torrents from qBittorrent - in PowerShell an
 Configurable delay (only remove torrents once they have been completed for certain number of minutes).
 
 ## qBittorrent setup
+**Note:** requires qBittorrent version 4.1 or later
 
 In your qBittorrent settings, enable this setting:
 
