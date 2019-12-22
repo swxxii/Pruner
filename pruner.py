@@ -17,25 +17,34 @@ from datetime import datetime, timedelta
 # Remove torrents once completed for this many minutes
 prune_after = 10
 
-# Change to the IP and Port of your qBittorrent server
-server = "10.0.0.2:8081"
+# Change to the details of your qBittorrent server
+server = 'http://10.0.0.2:8081'
+username = 'admin'
+password = 'bittorrent'
 
 #
-#   MAIN SCRIPT EXECUTION
+#   FUNCTIONS
 #
 
-# calculate the time prune_after mins ago
-threshold = datetime.now() - timedelta(minutes=prune_after)
-# make readable version so we can print later
-thre_str = threshold.strftime('%Y-%m-%d %H:%M:%S')
 
-# make GET request to qBittorrent API for list of finished torrents
-# returns JSON array
+def authenticate():
+    api_url = "{0}/api/v2/auth/login".format(server)
+    headers = {'Accept': 'application/json', 'Host': server,
+               'Origin': server, 'Referer': server}
+    data = {'username': username, 'password': password}
+    response = requests.get(api_url, headers=headers, data=data)
+    print("Request: {0}".format(api_url))
+    print("Response: {0}".format(response.status_code))
+    if (response.status_code == 200):
+        return response.cookies['SID']
+    else:
+        return None
 
 
 def get_torrents():
-    api_url = "http://{0}/api/v2/torrents/info?filter=completed".format(server)
-    headers = {'Accept': 'application/json'}
+    api_url = "{0}/api/v2/torrents/info?filter=completed".format(server)
+    headers = {'Accept': 'application/json', 'Host': server,
+               'Origin': server, 'Referer': server}
     response = requests.get(api_url, headers)
     print("Request: {0}".format(api_url))
     print("Response: {0}".format(response.status_code))
@@ -45,7 +54,34 @@ def get_torrents():
         return None
 
 
-# call the above function
+def delete_torrent(hash):
+    api_url = "{0}/api/v2/torrents/delete?hashes={1}&deleteFiles=false".format(
+        server, hash)
+    headers = {'Accept': 'application/json', 'Host': server,
+               'Origin': server, 'Referer': server}
+    cookies = {'SID': sid_cookie}
+    response = requests.get(api_url, headers=headers, cookies=cookies)
+    print("Request: {0}".format(api_url))
+    print("Response: {0}".format(response.status_code))
+
+#
+#   MAIN SCRIPT EXECUTION
+#
+
+
+# calculate the time prune_after mins ago
+threshold = datetime.now() - timedelta(minutes=prune_after)
+# make readable version so we can print later
+thre_str = threshold.strftime('%Y-%m-%d %H:%M:%S')
+
+
+print('Authenticating...')
+sid_cookie = authenticate()
+if (sid_cookie == None):
+    print('Could not login. Terminating.')
+    exit(1)
+print('Logged in OK. SID={0}'.format(sid_cookie))
+
 print("Getting torrents...")
 torrents = get_torrents()
 
@@ -70,10 +106,7 @@ if torrents is not None:
 
         # send the prune request to qBittorrent
         if (prune):
-            api_url = "http://{0}/api/v2/torrents/delete?hashes={1}&deleteFiles=false".format(server,t['hash'])
-            response = requests.post(api_url)
-            print("Request: {0}".format(api_url))
-            print("Response: {0}".format(response.status_code))
+            delete_torrent(t['hash'])
 
 else:
     print("Request error.")
