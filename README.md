@@ -1,17 +1,21 @@
-Pruner
-======
+# Pruner
 
-A simple script to remove completed torrents from qBittorrent - in PowerShell and Python.
+A simple Python script to remove completed torrents from qBittorrent. (No longer maintaining PowerShell version.)
 
 Configurable delay (only remove torrents once they have been completed for certain number of minutes).
 
-## qBittorrent setup
-**Note:** requires qBittorrent version 4.1 or later
+## Requirements
 
-In your qBittorrent settings, enable this setting:
+- qBittorrent version 4.1 or later
+- Python 3 recommended
+- `pip install requests`
 
-* Bypass authentication for clients in whitelisted IP subnets
+## Setup
 
-Then add the IP range of your LAN in the box e.g. 10.0.0.0/24.
+Edit the configuration section of the script to reflect your qBittorrent setup: `server` address, `username` and `password`.
 
-If you are running in Docker bridged mode, you need to enter the IP range of your client network e.g. 172.17.0.0/16.
+## Version history
+
+- **0.3** - Added authentication support, fix delete API call to use GET method
+- **0.2** - Updated to work with qBittorrent API v2.
+- **0.1** - Convert to Python. Fix bug with prune age detection.
