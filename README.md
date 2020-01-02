@@ -8,11 +8,26 @@ Configurable delay (only remove torrents once they have been completed for certa
 
 - qBittorrent version 4.1 or later
 - Python 3 recommended
-- `pip install requests`
 
-## Setup
+## Basic Setup
 
-Edit the configuration section of the script to reflect your qBittorrent setup: `server` address, `username` and `password`.
+- Run `pip install requests`
+- Edit the configuration section of the script to reflect your qBittorrent setup: `server` address, `username` and `password`.
+
+## Synology NAS Setup
+
+- Log into NAS as admin
+- Run `pip install virtualenv` -- installs the Python `virtualenv` package.
+- Run `virtualenv env` -- creates a Python environment (in your home dir) called `env`.
+- Run `. env/bin/activate` -- start Python in the virtual environment.
+- Run `pip install requests` -- install the requests package into your virtual environment.
+- Copy `run-pruner.sh` to your Synology scripts folder
+- Update `run-pruner.sh` to point to wherever you put `pruner.py`.
+- in Synology scheduler call the `run-pruner.sh` script.
+
+## Docker Setup
+
+- COMING SOON!
 
 ## Version history
 
