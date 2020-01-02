@@ -16,9 +16,8 @@ Configurable delay (only remove torrents once they have been completed for certa
 
 ## Synology NAS Setup
 
-- Log into NAS as admin
-- Run `pip install virtualenv` -- installs the Python `virtualenv` package.
-- Run `virtualenv env` -- creates a Python environment (in your home dir) called `env`.
+- Log into NAS as admin, `cd` to home dir
+- Run `python3 -m venv env` -- creates a Python environment (in your home dir) called `env`.
 - Run `. env/bin/activate` -- start Python in the virtual environment.
 - Run `pip install requests` -- install the requests package into your virtual environment.
 - Copy `run-pruner.sh` to your Synology scripts folder
