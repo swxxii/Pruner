@@ -15,6 +15,7 @@ Configurable delay (only remove torrents once they have been completed for certa
 - Edit the configuration section of the script to reflect your qBittorrent setup: `server` address, `username` and `password`.
 
 ## Synology NAS Setup
+**Background:** This method uses a Python virtual environment to install packages and run the script. This is a recommended step to prevent us having to modify the stock Python installation in the NAS which could break stuff.
 - Make sure you have enabled home folders in Synology DiskStation.
 - Log into your NAS as admin, `cd` to home dir
 - Run `python3 -m venv env` -- creates a Python environment (in your home dir) called `env`.
