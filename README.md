@@ -15,14 +15,14 @@ Configurable delay (only remove torrents once they have been completed for certa
 - Edit the configuration section of the script to reflect your qBittorrent setup: `server` address, `username` and `password`.
 
 ## Synology NAS Setup
-
-- Log into NAS as admin, `cd` to home dir
+- Make sure you have enabled home folders in Synology DiskStation.
+- Log into your NAS as admin, `cd` to home dir
 - Run `python3 -m venv env` -- creates a Python environment (in your home dir) called `env`.
 - Run `. env/bin/activate` -- start Python in the virtual environment.
 - Run `pip install requests` -- install the requests package into your virtual environment.
 - Copy `run-pruner.sh` to your Synology scripts folder
 - Update `run-pruner.sh` to point to wherever you put `pruner.py`.
-- in Synology scheduler call the `run-pruner.sh` script.
+- In the Synology Task Scheduler create a job to call the absolute path of `run-pruner.sh` script.
 
 ## Docker Setup
 
