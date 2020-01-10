@@ -15,13 +15,17 @@ from datetime import datetime, timedelta
 #   CONFIGURATION
 #
 
-# Remove torrents once completed for this many minutes
-prune_after = 10
-
-# Change to the details of your qBittorrent server
+# Change to the details of your qBittorrent server.
 server = 'http://10.0.0.2:8081'
 username = 'admin'
 password = 'bittorrent'
+
+# Remove torrents only if completed this many minutes ago.
+# Set to zero (0) to prune immediately.
+prune_after = 10
+
+# Don't prune torrents in this category - useful for Sonarr
+exclude = 'TV'
 
 #
 #   FUNCTIONS
@@ -97,7 +101,7 @@ if torrents is not None:
         fin_str = finished.strftime('%Y-%m-%d %H:%M:%S')
 
         # boolean to decide to prune or not?
-        prune = finished < threshold
+        prune = finished < threshold and t['category'].lower() != exclude.lower()
 
         # print some info
         print("\nTorrent: {0}".format(t['name']))
