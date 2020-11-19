@@ -10,26 +10,33 @@ A simple Python script to remove completed torrents from qBittorrent. (No longer
 - qBittorrent 4.1 or later
 - Python 3
 
-## Getting Started
+## Basic Install
 
 - Run `pip install requests`
-- Update the config section of the script to reflect your qBittorrent setup: `server` address, `username` and `password`.
+- Update the config section of the script for your qBittorrent setup: `server` address, `username` and `password`.
 
-## Synology NAS Setup
+## Synology NAS Install
 
-**Background:** This method uses a Python virtual environment (venv) to install packages and run the script. This is recommended to prevent modifying the Python installation in the NAS operating system (which could break stuff). To ease scheduling I use a bash script to start the venv & run the script (there is probably a neater way to do this).
+### Prerequisites
+1. Enable home folders via DSM<br> (Control Panel > User > Advanced > Enable user home service).
+1. Enable SSH access via DSM and log in as `admin`
+1. Install Python 3 package via DSM. (3.8.2 used)
 
-- Make sure you have enabled home folders in Synology DiskStation<br> (Control Panel > User > Advanced > Enable user home service).
-- SSH into your NAS as `admin` user.
-- Run `python3 -m venv env` — creates a Python venv (in your home dir) called `env`.
-- Run `. env/bin/activate` — start Python inside the virtual environment.
-- Run `pip install requests` — install the requests package into the venv.
-- Copy `run-pruner.sh` to your Synology scripts folder and update path to `pruner.py`.
-- In the Synology Task Scheduler create a job to call the `run-pruner.sh` script,<br>e.g. `bash /volume1/configs/scripts/run-pruner.sh`.
+### Setup
 
-## Docker Setup
+1. Invoke pip using this command to install the `requests` module
 
-- COMING SOON!
+    ```
+    admin@server:~$ /volume1/\@appstore/py3k/usr/local/bin/pip3 install requests
+    ```
+
+1. Put the configured `pruner.py` script somewhere on your NAS.
+
+1. Test it manually from the shell to make sure it works.
+    ```
+    admin@server:~$ python3 /volume1/configs/scripts/pruner.py
+    ```
+1. Create a cron job (scheduled task) in Synology DSM with the above command to run as `admin` user. 
 
 ## Version history
 
