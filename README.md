@@ -1,6 +1,8 @@
 # Pruner
 
-A simple Python script to remove completed torrents from qBittorrent. (No longer maintaining PowerShell version.)
+A simple Python script to remove completed torrents from qBittorrent.
+
+_Note: PowerShell version no longer maintained!_
 
 - Configurable delay (only remove torrents once completed for X minutes)
 - Skip torrents in certain category (useful for Sonarr)
