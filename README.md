@@ -1,8 +1,9 @@
 # Pruner
 
-A simple Python script to remove completed torrents from qBittorrent.
-
+A simple Python script to remove completed torrents from qBittorrent.<br>
 _Note: PowerShell version no longer maintained!_
+
+## Features
 
 - Configurable delay (only remove torrents once completed for X minutes)
 - Skip torrents in certain category (useful for Sonarr)
@@ -10,19 +11,23 @@ _Note: PowerShell version no longer maintained!_
 ## Requirements
 
 - qBittorrent 4.1 or later
-- Python 3
+- Python 3 + `requests` module
 
 ## Basic Install
 
-- Run `pip install requests`
-- Update the config section of the script for your qBittorrent setup: `server` address, `username` and `password`.
+- Run `pip install requests`<br>
+_If that fails, google how to install pip into python 3 for your environment._
+- Update script config variables for your setup: `server`, `username` and `password`.
+- Run script with `python3 /path/to/script/pruner.py`
+- If this doesn't work your python or pip is set up wrong.
 
 ## Synology NAS Install
 
 ### Prerequisites
 1. Enable home folders via DSM<br> (Control Panel > User > Advanced > Enable user home service).
-1. Enable SSH access via DSM and log in as `admin`
-1. Install Python 3 package via DSM. (3.8.2 used)
+1. Enable SSH access via DSM and log in as `admin` user<br>
+_Using the default `admin` account makes your NAS vulnerable to brute force attacks but we will use it here for simplicity._
+3. Install Python 3 package via DSM. (3.8.2 used)
 
 ### Setup
 
