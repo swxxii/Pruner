@@ -1,4 +1,4 @@
-#! /usr/bin/python3
+#! /bin/python3
 ##########################################################################
 # pruner.py - https://github.com/swxxii/Pruner
 # A Python script to remove completed torrents from qBittorrent
@@ -16,7 +16,7 @@ from datetime import datetime, timedelta
 #
 
 # Change to the details of your qBittorrent server.
-server = 'http://10.0.0.2:8081'
+server = 'http://192.168.1.2:8081'
 username = 'admin'
 password = 'bittorrent'
 
