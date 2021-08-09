@@ -1,4 +1,4 @@
-#! /bin/python3
+#! /bin/python
 ##########################################################################
 # pruner.py - https://github.com/swxxii/Pruner
 # A Python script to remove completed torrents from qBittorrent
